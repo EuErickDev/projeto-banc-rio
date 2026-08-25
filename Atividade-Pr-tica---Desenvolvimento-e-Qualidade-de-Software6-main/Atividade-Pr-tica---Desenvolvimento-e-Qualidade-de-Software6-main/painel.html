@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itaú - Minha Conta</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ============================================================
+   RESET & BASE - Estilo Itaú Unibanco
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --itau-orange: #FF6200;
+  --itau-orange-hover: #E05500;
+  --itau-orange-light: #FFF0E8;
+  --itau-dark: #1A1A1A;
+  --itau-gray: #F5F5F5;
+  --itau-gray-light: #FAFAFA;
+  --itau-border: #E8E8E8;
+  --itau-muted: #6B6B6B;
+  --itau-white: #FFFFFF;
+  --itau-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  --itau-shadow-hover: 0 4px 24px rgba(0, 0, 0, 0.12);
+  --itau-radius: 12px;
+  --itau-radius-sm: 8px;
+  --itau-transition: 0.25s ease;
+  --header-height: 72px;
+  --nav-height: 48px;
+  --bottom-nav-height: 64px;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--itau-dark);
+  background: var(--itau-gray);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-bottom: 0;
+}
+
+/* ============================================================
+   HEADER - Estilo Itaú
+   ============================================================ */
+.header {
+  height: var(--header-height);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--itau-white);
+  border-bottom: 1px solid var(--itau-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  gap: 0.5rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--itau-orange);
+  color: var(--itau-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--itau-orange) 0%, #cc4f00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  flex-shrink: 0;
+}
+
+.user-greeting {
+  min-width: 0;
+  flex: 1;
+}
+
+.user-info h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--itau-dark);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-info p {
+  font-size: 0.75rem;
+  color: var(--itau-muted);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.header-icons button {
+  background: none;
+  border: none;
+  font-size: 1.15rem;
+  color: var(--itau-dark);
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  border-radius: 50%;
+  transition: background var(--itau-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-icons button:hover {
+  background: var(--itau-gray-light);
+}
+
+/* ============================================================
+   NAVEGAÇÃO SECUNDÁRIA
+   ============================================================ */
+.section-nav {
+  background: var(--itau-white);
+  padding: 0 2rem;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 1px solid var(--itau-border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.section-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.section-nav a {
+  color: var(--itau-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.85rem;
+  padding: 0.4rem 0;
+  border-bottom: 2px solid transparent;
+  transition: all var(--itau-transition);
+  white-space: nowrap;
+}
+
+.section-nav a:hover {
+  color: var(--itau-orange);
+  border-bottom-color: var(--itau-orange);
+}
+
+/* ============================================================
+   CONTAINER PRINCIPAL
+   ============================================================ */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  min-height: calc(100vh - var(--header-height) - var(--nav-height) - 100px);
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* --- Títulos --- */
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--itau-dark);
+  margin-bottom: 0.25rem;
+}
+
+.section-description {
+  color: var(--itau-muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+/* --- Card Saldo --- */
+.account-current-section {
+  background: var(--itau-white);
+  border-radius: var(--itau-radius);
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--itau-shadow);
+  border: 1px solid var(--itau-border);
+  transition: box-shadow var(--itau-transition);
+}
+
+.account-current-section:hover {
+  box-shadow: var(--itau-shadow-hover);
+}
+
+.balance-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.balance-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.balance-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--itau-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.balance-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--itau-muted);
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+  transition: all var(--itau-transition);
+}
+
+.balance-toggle-btn:hover {
+  background: var(--itau-gray-light);
+  color: var(--itau-orange);
+}
+
+.balance-amount {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--itau-dark);
+  letter-spacing: -0.5px;
+}
+
+.account-current-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--itau-border);
+  font-size: 0.8rem;
+}
+
+.account-current-details div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.account-current-details span {
+  color: var(--itau-muted);
+  font-weight: 400;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.account-current-details strong {
+  font-weight: 600;
+  color: var(--itau-dark);
+  font-size: 0.9rem;
+}
+
+/* --- Ações rápidas --- */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.75rem;
+  background: var(--itau-white);
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--itau-radius);
+  border: 1px solid var(--itau-border);
+  box-shadow: var(--itau-shadow);
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: var(--itau-gray-light);
+  border: none;
+  border-radius: var(--itau-radius-sm);
+  padding: 0.75rem 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--itau-dark);
+  cursor: pointer;
+  transition: all var(--itau-transition);
+  text-align: center;
+  min-height: 80px;
+}
+
+.action-btn i {
+  font-size: 1.4rem;
+  color: var(--itau-orange);
+}
+
+.action-btn:hover {
+  background: var(--itau-orange-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 98, 0, 0.15);
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+.action-btn.compact-action {
+  padding: 0.6rem 0.25rem;
+  min-height: 70px;
+}
+
+/* --- Cartão de crédito --- */
+#credit-card {
+  background: var(--itau-white);
+  padding: 1.5rem 1.75rem;
+  border-radius: var(--itau-radius);
+  border: 1px solid var(--itau-border);
+  box-shadow: var(--itau-shadow);
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.card {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  color: var(--itau-white);
+  border-radius: var(--itau-radius);
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform var(--itau-transition), box-shadow var(--itau-transition);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-logo {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.card-status {
+  font-size: 0.65rem;
+  font-weight: 600;
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid rgba(74, 222, 128, 0.1);
+}
+
+.card-number {
+  font-size: 1.3rem;
+  letter-spacing: 3px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0.25rem 0;
+  font-family: 'Courier New', monospace;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.card-holder {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-holder-label {
+  font-size: 0.55rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.card-holder-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.card-info-label {
+  font-size: 0.55rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.card-info-value {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* --- Extrato --- */
+.transactions {
+  background: var(--itau-white);
+  border-radius: var(--itau-radius);
+  padding: 1.5rem 1.75rem;
+  border: 1px solid var(--itau-border);
+  box-shadow: var(--itau-shadow);
+}
+
+.transactions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.transactions-header h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.view-all {
+  background: none;
+  border: none;
+  color: var(--itau-orange);
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  transition: all var(--itau-transition);
+}
+
+.view-all:hover {
+  background: var(--itau-orange-light);
+}
+
+.empty-transactions {
+  color: var(--itau-muted);
+  font-size: 0.9rem;
+  padding: 2rem 0;
+  text-align: center;
+  background: var(--itau-gray-light);
+  border-radius: var(--itau-radius-sm);
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--itau-border);
+  transition: background var(--itau-transition);
+}
+
+.transaction-item:hover {
+  background: var(--itau-gray-light);
+  margin: 0 -0.5rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: var(--itau-radius-sm);
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.transaction-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.transaction-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.transaction-details h4 {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--itau-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.transaction-details p {
+  font-size: 0.7rem;
+  color: var(--itau-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.transaction-value {
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.transaction-value.debit {
+  color: #d32f2f;
+}
+
+.transaction-value.credit {
+  color: #2e7d32;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sidebar-card {
+  background: var(--itau-white);
+  border-radius: var(--itau-radius);
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--itau-border);
+  box-shadow: var(--itau-shadow);
+  transition: box-shadow var(--itau-transition);
+}
+
+.sidebar-card:hover {
+  box-shadow: var(--itau-shadow-hover);
+}
+
+.sidebar-card h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--itau-dark);
+}
+
+.sidebar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--itau-border);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--itau-transition);
+}
+
+.sidebar-item:last-child {
+  border-bottom: none;
+}
+
+.sidebar-item:hover {
+  background: var(--itau-gray-light);
+  margin: 0 -0.5rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+.sidebar-item-label {
+  color: var(--itau-muted);
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-item-value {
+  font-weight: 500;
+  color: var(--itau-dark);
+}
+
+.security-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #2e7d32;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.security-status i {
+  font-size: 1.1rem;
+}
+
+.panel-action {
+  background: none;
+  border: none;
+  color: var(--itau-orange);
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.3rem 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all var(--itau-transition);
+}
+
+.panel-action:hover {
+  color: var(--itau-orange-hover);
+  gap: 0.6rem;
+}
+
+/* ============================================================
+   HELP SECTION
+   ============================================================ */
+.help-section {
+  max-width: 1280px;
+  margin: 0 auto 2rem;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.help-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.help-kicker {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--itau-orange);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.help-section-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 0.1rem;
+}
+
+.help-section-header i {
+  font-size: 2rem;
+  color: var(--itau-orange);
+  opacity: 0.3;
+}
+
+.help-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.help-option {
+  background: var(--itau-white);
+  border: 1px solid var(--itau-border);
+  border-radius: var(--itau-radius);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: all var(--itau-transition);
+  text-align: left;
+}
+
+.help-option:hover {
+  border-color: var(--itau-orange);
+  box-shadow: 0 4px 20px rgba(255, 98, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.help-option i:first-child {
+  font-size: 1.2rem;
+  color: var(--itau-orange);
+  width: 1.8rem;
+  flex-shrink: 0;
+}
+
+.help-option span {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.help-option strong {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.help-option small {
+  font-size: 0.7rem;
+  color: var(--itau-muted);
+}
+
+.help-option i:last-child {
+  color: var(--itau-muted);
+  font-size: 0.75rem;
+  margin-left: auto;
+  transition: transform var(--itau-transition);
+}
+
+.help-option:hover i:last-child {
+  transform: translateX(4px);
+  color: var(--itau-orange);
+}
+
+/* ============================================================
+   MOBILE BOTTOM NAV
+   ============================================================ */
+.mobile-bottom-nav {
+  display: none;
+  background: var(--itau-white);
+  border-top: 1px solid var(--itau-border);
+  padding: 0.4rem 0.25rem;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+  height: var(--bottom-nav-height);
+}
+
+.mobile-bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  text-decoration: none;
+  color: var(--itau-muted);
+  font-size: 0.6rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  transition: all var(--itau-transition);
+  min-width: 48px;
+}
+
+.mobile-bottom-nav a i {
+  font-size: 1.2rem;
+}
+
+.mobile-bottom-nav a.is-active {
+  color: var(--itau-orange);
+  background: var(--itau-orange-light);
+}
+
+.mobile-bottom-nav a:hover {
+  color: var(--itau-orange);
+  background: var(--itau-orange-light);
+}
+
+/* ============================================================
+   MODAL / SETTINGS
+   ============================================================ */
+.settings-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 2rem;
+}
+
+.settings-modal.is-open {
+  display: flex;
+  animation: fadeIn 0.25s ease;
+}
+
+.settings-panel {
+  background: var(--itau-white);
+  border-radius: var(--itau-radius);
+  max-width: 420px;
+  width: 100%;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.settings-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.settings-header p {
+  font-size: 0.85rem;
+  color: var(--itau-muted);
+}
+
+.settings-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--itau-muted);
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+  transition: all var(--itau-transition);
+}
+
+.settings-close:hover {
+  background: var(--itau-gray-light);
+  color: var(--itau-dark);
+}
+
+.settings-account {
+  background: var(--itau-gray-light);
+  padding: 1rem 1.25rem;
+  border-radius: var(--itau-radius-sm);
+  margin-bottom: 1.5rem;
+}
+
+.settings-account strong {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.settings-account span {
+  font-size: 0.85rem;
+  color: var(--itau-muted);
+}
+
+.settings-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--itau-border);
+}
+
+.settings-option:last-child {
+  border-bottom: none;
+}
+
+.settings-option strong {
+  display: block;
+  font-size: 0.9rem;
+}
+
+.settings-option small {
+  font-size: 0.75rem;
+  color: var(--itau-muted);
+}
+
+.settings-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.settings-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.settings-switch span {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #ccc;
+  border-radius: 24px;
+  transition: background var(--itau-transition);
+}
+
+.settings-switch span::before {
+  content: '';
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background: var(--itau-white);
+  border-radius: 50%;
+  transition: transform var(--itau-transition);
+}
+
+.settings-switch input:checked + span {
+  background: var(--itau-orange);
+}
+
+.settings-switch input:checked + span::before {
+  transform: translateX(20px);
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--itau-dark);
+  color: var(--itau-white);
+  padding: 0.75rem 1.75rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 9999;
+  pointer-events: none;
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   RESPONSIVIDADE - TABLET (768px - 1024px)
+   ============================================================ */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .help-options {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ============================================================
+   RESPONSIVIDADE - MOBILE GRANDE (600px - 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 60px;
+    --nav-height: 44px;
+    --bottom-nav-height: 60px;
+  }
+
+  .header {
+    padding: 0 1rem;
+  }
+
+  .profile-avatar {
+    width: 34px;
+    height: 34px;
+    font-size: 0.75rem;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .user-info h3 {
+    font-size: 0.85rem;
+  }
+
+  .user-info p {
+    font-size: 0.65rem;
+  }
+
+  .header-icons button {
+    font-size: 1rem;
+    padding: 0.3rem 0.4rem;
+  }
+
+  .section-nav {
+    padding: 0 1rem;
+    gap: 1.25rem;
+  }
+
+  .section-nav a {
+    font-size: 0.75rem;
+  }
+
+  .container {
+    padding: 1rem 1rem;
+    gap: 1rem;
+  }
+
+  .main-content {
+    gap: 1rem;
+  }
+
+  .account-current-section {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .balance-amount {
+    font-size: 1.8rem;
+  }
+
+  .account-current-details {
+    gap: 0.75rem 1.5rem;
+  }
+
+  .quick-actions {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .action-btn {
+    min-height: 70px;
+    padding: 0.5rem 0.2rem;
+    font-size: 0.65rem;
+  }
+
+  .action-btn i {
+    font-size: 1.2rem;
+  }
+
+  #credit-card {
+    padding: 1.25rem;
+  }
+
+  .card {
+    padding: 1.25rem;
+  }
+
+  .card-number {
+    font-size: 1.1rem;
+  }
+
+  .transactions {
+    padding: 1.25rem;
+  }
+
+  .sidebar {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .help-section {
+    padding: 0 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .help-options {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+  }
+
+  body {
+    padding-bottom: var(--bottom-nav-height);
+  }
+
+  .settings-modal {
+    padding: 1rem;
+    align-items: flex-end;
+  }
+
+  .settings-panel {
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+
+  .toast {
+    bottom: calc(var(--bottom-nav-height) + 1rem);
+  }
+}
+
+/* ============================================================
+   RESPONSIVIDADE - MOBILE PEQUENO (até 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+  :root {
+    --header-height: 54px;
+    --nav-height: 40px;
+    --bottom-nav-height: 56px;
+  }
+
+  .header {
+    padding: 0 0.75rem;
+  }
+
+  .profile-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 0.65rem;
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
+
+  .user-info h3 {
+    font-size: 0.75rem;
+  }
+
+  .user-info p {
+    font-size: 0.6rem;
+  }
+
+  .header-icons button {
+    font-size: 0.9rem;
+    padding: 0.25rem 0.3rem;
+  }
+
+  .section-nav {
+    padding: 0 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .section-nav a {
+    font-size: 0.65rem;
+  }
+
+  .container {
+    padding: 0.75rem 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .account-current-section {
+    padding: 1rem;
+    border-radius: var(--itau-radius-sm);
+  }
+
+  .balance-amount {
+    font-size: 1.5rem;
+  }
+
+  .account-current-details {
+    font-size: 0.7rem;
+    gap: 0.5rem 1rem;
+  }
+
+  .quick-actions {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0.75rem;
+    gap: 0.4rem;
+  }
+
+  .action-btn {
+    min-height: 60px;
+    font-size: 0.6rem;
+    padding: 0.4rem 0.1rem;
+    border-radius: 6px;
+  }
+
+  .action-btn i {
+    font-size: 1rem;
+  }
+
+  .action-btn.compact-action {
+    min-height: 54px;
+  }
+
+  #credit-card {
+    padding: 1rem;
+    border-radius: var(--itau-radius-sm);
+  }
+
+  .card {
+    padding: 1rem;
+    border-radius: var(--itau-radius-sm);
+  }
+
+  .card-number {
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+  }
+
+  .card-holder-name {
+    font-size: 0.7rem;
+  }
+
+  .transactions {
+    padding: 1rem;
+    border-radius: var(--itau-radius-sm);
+  }
+
+  .transactions-header h3 {
+    font-size: 0.9rem;
+  }
+
+  .transaction-item {
+    padding: 0.5rem 0;
+  }
+
+  .transaction-details h4 {
+    font-size: 0.75rem;
+  }
+
+  .transaction-details p {
+    font-size: 0.6rem;
+  }
+
+  .transaction-value {
+    font-size: 0.8rem;
+  }
+
+  .sidebar-card {
+    padding: 1rem;
+    border-radius: var(--itau-radius-sm);
+  }
+
+  .sidebar-card h3 {
+    font-size: 0.8rem;
+  }
+
+  .sidebar-item {
+    font-size: 0.75rem;
+    padding: 0.4rem 0;
+  }
+
+  .help-section {
+    padding: 0 0.75rem;
+  }
+
+  .help-section-header h2 {
+    font-size: 1rem;
+  }
+
+  .help-option {
+    padding: 0.75rem 1rem;
+    border-radius: var(--itau-radius-sm);
+  }
+
+  .help-option strong {
+    font-size: 0.8rem;
+  }
+
+  .mobile-bottom-nav {
+    height: var(--bottom-nav-height);
+    padding: 0.25rem 0.1rem;
+  }
+
+  .mobile-bottom-nav a {
+    font-size: 0.55rem;
+    padding: 0.15rem 0.25rem;
+    min-width: 40px;
+  }
+
+  .mobile-bottom-nav a i {
+    font-size: 1rem;
+  }
+
+  .settings-modal {
+    padding: 0.5rem;
+  }
+
+  .settings-panel {
+    padding: 1.25rem;
+    border-radius: var(--itau-radius-sm);
+  }
+
+  .toast {
+    font-size: 0.75rem;
+    padding: 0.6rem 1.25rem;
+    bottom: calc(var(--bottom-nav-height) + 0.75rem);
+  }
+}
+
+/* ============================================================
+   RESPONSIVIDADE - TELAS MUITO PEQUENAS (até 360px)
+   ============================================================ */
+@media (max-width: 360px) {
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .account-current-details {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-info {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .help-option {
+    flex-wrap: wrap;
+  }
+}
+
+/* ============================================================
+   IMPRESSÃO
+   ============================================================ */
+@media print {
+  .header,
+  .section-nav,
+  .quick-actions,
+  .mobile-bottom-nav,
+  .settings-modal,
+  .toast {
+    display: none !important;
+  }
+
+  .container {
+    display: block;
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .sidebar {
+    display: block;
+    margin-top: 2rem;
+  }
+
+  .sidebar-card {
+    break-inside: avoid;
+    border: 1px solid #ddd;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <div class="profile-avatar" id="profileAvatar" aria-hidden="true">TE</div>
+      <div class="logo">itaú</div>
+      <div class="user-greeting">
+        <div class="user-info">
+          <h3 id="userName">Olá, Usuário!</h3>
+          <p id="userEmail">seu@email.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="header-icons">
+      <button type="button" onclick="showToast('Você não tem novas notificações.')" title="Notificações"><i class="fas fa-bell"></i></button>
+      <button type="button" onclick="window.location.href='configuração.html'" title="Configurações" aria-label="Abrir configurações"><i class="fas fa-cog"></i></button>
+      <button onclick="logout()" title="Sair"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </header>
+
+  <nav class="section-nav" aria-label="Navegação da conta">
+    <a href="#overview">Visão geral</a>
+    <a href="cartoes.html">Cartões</a>
+    <a href="#transactions">Extrato</a>
+    <a href="#account-data">Conta</a>
+    <a href="#help">Ajuda</a>
+  </nav>
+
+  <!-- CONTAINER PRINCIPAL -->
+  <div class="container">
+    <!-- COLUNA PRINCIPAL -->
+    <div class="main-content">
+      <!-- CARD DE SALDO -->
+      <section class="account-current-section" id="overview" aria-labelledby="current-account-title">
+        <h2 class="section-title" id="current-account-title">Conta corrente</h2>
+      <div class="balance-section">
+        <div class="balance-header">
+          <div class="balance-label">Saldo disponível</div>
+          <button class="balance-toggle-btn" type="button" onclick="toggleBalance()" aria-label="Ocultar saldo" aria-pressed="false"><i class="fas fa-eye" id="balanceEye" aria-hidden="true"></i></button>
+        </div>
+        <div class="balance-amount">R$ <span id="balanceAmount">2.847,50</span></div>
+      </div>
+      <div class="account-current-details">
+        <div><span>Agência</span><strong>0001</strong></div>
+        <div><span>Conta corrente</span><strong>123456-7</strong></div>
+        <div><span>Tipo de conta</span><strong>Conta corrente</strong></div>
+      </div>
+      </section>
+
+      <!-- AÇÕES RÁPIDAS -->
+      <div class="quick-actions">
+        <button class="action-btn" type="button" onclick="window.location.href = 'pix.html'">
+          <i class="fas fa-mobile-alt"></i>
+          <span>Pix</span>
+        </button>
+        <button class="action-btn" type="button" onclick="document.getElementById('poupanca').scrollIntoView({ behavior: 'smooth' })">
+          <i class="fas fa-piggy-bank"></i>
+          <span>Poupança</span>
+        </button>
+        <button class="action-btn" type="button" onclick="window.location.href = 'pagar.html'">
+          <i class="fas fa-money-bill-wave"></i>
+          <span>Pagar</span>
+        </button>
+        <button class="action-btn" type="button" onclick="window.location.href = 'extrato.html'">
+          <i class="fas fa-receipt"></i>
+          <span>Extrato</span>
+        </button>
+        <button class="action-btn" type="button" onclick="window.location.href = 'cartoes.html'">
+          <i class="fas fa-credit-card"></i>
+          <span>Cartões</span>
+        </button>
+        <button class="action-btn compact-action" type="button" onclick="window.location.href = 'pix.html'">
+          <i class="fas fa-qrcode"></i>
+          <span>Central Pix</span>
+        </button>
+        <button class="action-btn compact-action" type="button" onclick="window.location.href = 'configuração.html'">
+          <i class="fas fa-key"></i>
+          <span>iToken</span>
+        </button>
+        <button class="action-btn compact-action" type="button" onclick="document.getElementById('help').scrollIntoView({ behavior: 'smooth' })">
+          <i class="far fa-comment-alt"></i>
+          <span>Ajuda</span>
+        </button>
+      </div>
+
+      <!-- CARTÕES -->
+      <div id="credit-card">
+        <h2 class="section-title">Cartões</h2>
+        <p class="section-description">Acesse seus cartões de crédito e acompanhe suas faturas.</p>
+        <div class="cards-container">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-logo">ITAÚ</div>
+              <div class="card-status">Ativo</div>
+            </div>
+            <div class="card-number">•••• •••• •••• 3456</div>
+            <div class="card-footer">
+              <div class="card-holder">
+                <span class="card-holder-label">TITULAR</span>
+                <span class="card-holder-name" id="cardHolderName">TITULAR DA CONTA</span>
+              </div>
+              <div class="card-info">
+                <div class="card-info-label">Vencimento</div>
+                <div class="card-info-value">12/26</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- EXTRATO -->
+      <div class="transactions" id="transactions">
+        <div class="transactions-header">
+          <h3>Últimas Movimentações</h3>
+          <button type="button" class="view-all" onclick="showToast('O extrato completo estará disponível nesta simulação.')">Ver tudo</button>
+        </div>
+
+        <p class="empty-transactions">Nenhuma movimentação registrada.</p>
+      </div>
+    </div>
+
+    <!-- SIDEBAR DIREITA -->
+    <aside class="sidebar">
+      <!-- PRODUTOS -->
+      <div class="sidebar-card" id="account-data">
+        <h3>Produtos da conta</h3>
+        <div class="sidebar-item" onclick="showToast('Conta corrente selecionada.')">
+          <span class="sidebar-item-label"><i class="fas fa-wallet" style="color: #FF6200; margin-right: 0.5rem;"></i>Conta</span>
+          <span class="sidebar-item-value">Conta corrente</span>
+        </div>
+        <div class="sidebar-item" id="poupanca" onclick="showToast('Poupança selecionada.')">
+          <span class="sidebar-item-label"><i class="fas fa-piggy-bank" style="color: #FF6200; margin-right: 0.5rem;"></i>Poupança</span>
+          <span class="sidebar-item-value">R$ 1.250</span>
+        </div>
+      </div>
+
+      <!-- INFORMAÇÕES DA CONTA -->
+      <div class="sidebar-card">
+        <h3>Dados da Conta</h3>
+        <div class="sidebar-item">
+          <span class="sidebar-item-label">Agência</span>
+          <span class="sidebar-item-value">0001</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="sidebar-item-label">Conta</span>
+          <span class="sidebar-item-value">123456-7</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="sidebar-item-label">CPF</span>
+          <span class="sidebar-item-value">•••.•••.•••-••</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Segurança</h3>
+        <div class="security-status"><i class="fas fa-shield-alt"></i> Conta protegida</div>
+        <p style="color: var(--muted); font-size: 11px; line-height: 1.5; margin-top: 10px;">Nenhuma atividade suspeita foi identificada nos últimos 30 dias.</p>
+        <button class="panel-action" type="button" onclick="showToast('Central de segurança aberta.')" style="margin-top: 12px;">Ver atividades <i class="fas fa-arrow-right"></i></button>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Precisa de ajuda?</h3>
+        <p style="color: var(--muted); font-size: 11px; line-height: 1.5;">Encontre respostas ou fale com nosso atendimento.</p>
+        <button class="panel-action" type="button" onclick="showToast('Central de ajuda aberta.')" style="margin-top: 12px;">Acessar atendimento <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </aside>
+  </div>
+
+  <section class="help-section" id="help" aria-labelledby="help-title">
+    <div class="help-section-header">
+      <div>
+        <span class="help-kicker">Atendimento Itaú</span>
+        <h2 id="help-title">Como podemos ajudar?</h2>
+      </div>
+      <i class="fas fa-headset" aria-hidden="true"></i>
+    </div>
+    <div class="help-options">
+      <button type="button" class="help-option" onclick="showToast('Central de dúvidas aberta.')">
+        <i class="fas fa-circle-question" aria-hidden="true"></i>
+        <span><strong>Central de dúvidas</strong><small>Encontre respostas rápidas</small></span>
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="help-option" onclick="showToast('Atendimento iniciado nesta simulação.')">
+        <i class="fas fa-comments" aria-hidden="true"></i>
+        <span><strong>Fale com o Itaú</strong><small>Atendimento e suporte</small></span>
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="help-option" onclick="showToast('Telefones de atendimento disponíveis nesta simulação.')">
+        <i class="fas fa-phone" aria-hidden="true"></i>
+        <span><strong>Telefones úteis</strong><small>Consulte nossos canais</small></span>
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  </section>
+
+  <nav class="mobile-bottom-nav" aria-label="Navegação principal">
+    <a class="is-active" href="#overview"><i class="fas fa-house" aria-hidden="true"></i><span>Casa</span></a>
+    <a href="extrato.html"><i class="fas fa-list" aria-hidden="true"></i><span>Extrato</span></a>
+    <a href="pagar.html"><i class="fas fa-arrow-right-arrow-left" aria-hidden="true"></i><span>Pagamentos</span></a>
+    <a href="#help"><i class="fas fa-gift" aria-hidden="true"></i><span>Pra você</span></a>
+    <a href="menu.html"><i class="fas fa-grip" aria-hidden="true"></i><span>Menu</span></a>
+  </nav>
+
+  <div class="settings-modal" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" onclick="closeSettingsOnBackdrop(event)">
+    <section class="settings-panel">
+      <div class="settings-header">
+        <div>
+          <h2 id="settingsTitle">Configurações</h2>
+          <p>Gerencie suas preferências da conta.</p>
+        </div>
+        <button class="settings-close" type="button" onclick="closeSettings()" aria-label="Fechar configurações" title="Fechar"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="settings-account">
+        <strong id="settingsName">Sua conta</strong>
+        <span id="settingsEmail">seu@email.com</span>
+      </div>
+      <div class="settings-option">
+        <div>
+          <strong>Notificações</strong>
+          <small>Receber avisos sobre movimentações.</small>
+        </div>
+        <label class="settings-switch" title="Ativar notificações">
+          <input type="checkbox" id="notificationsToggle" checked onchange="saveNotificationPreference()">
+          <span></span>
+        </label>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    let balanceVisible = true;
+    let toastTimer;
+
+    function getPanelAccountState() {
+      try {
+        const savedState = JSON.parse(localStorage.getItem('accountState'));
+        if (savedState && typeof savedState.balance === 'number' && Array.isArray(savedState.transactions)) {
+          return savedState;
+        }
+      } catch (error) {
+        localStorage.removeItem('accountState');
+      }
+
+      const state = { balance: 2847.50, transactions: [] };
+      localStorage.setItem('accountState', JSON.stringify(state));
+      return state;
+    }
+
+    function formatPanelCurrency(value) {
+      return Number(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function renderPanelAccountState() {
+      const state = getPanelAccountState();
+      const balanceAmount = document.getElementById('balanceAmount');
+      if (balanceVisible) {
+        balanceAmount.textContent = Number(state.balance).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      }
+
+      document.querySelectorAll('.dynamic-transaction').forEach((item) => item.remove());
+      const transactions = document.querySelector('.transactions');
+      const header = transactions.querySelector('.transactions-header');
+      const emptyTransactions = transactions.querySelector('.empty-transactions');
+      emptyTransactions.hidden = state.transactions.length > 0;
+      state.transactions.slice(0, 5).forEach((transaction) => {
+        const item = document.createElement('div');
+        item.className = 'transaction-item dynamic-transaction';
+        item.innerHTML = `
+          <div class="transaction-info">
+            <div class="transaction-icon" style="background-color: #fff1e8; color: #ff5a00;"><i class="fas fa-arrow-up-right-from-square"></i></div>
+            <div class="transaction-details"><h4>${transaction.title}</h4><p>${transaction.description} · ${transaction.date}</p></div>
+          </div>
+          <div class="transaction-value debit">${formatPanelCurrency(transaction.amount)}</div>
+        `;
+        header.insertAdjacentElement('afterend', item);
+      });
+    }
+
+    function logout() {
+      if (confirm('Tem certeza que deseja sair da sua conta?')) {
+        localStorage.clear();
+        window.location.href = "index.html";
+      }
+    }
+
+    function toggleBalance() {
+      const balanceAmount = document.getElementById('balanceAmount');
+      const eye = document.getElementById('balanceEye');
+
+      if (balanceVisible) {
+        balanceAmount.textContent = '••••••';
+        eye.classList.remove('fa-eye');
+        eye.classList.add('fa-eye-slash');
+        document.querySelector('.balance-toggle-btn').setAttribute('aria-label', 'Mostrar saldo');
+        document.querySelector('.balance-toggle-btn').setAttribute('aria-pressed', 'true');
+      } else {
+        balanceAmount.textContent = '2.847,50';
+        eye.classList.remove('fa-eye-slash');
+        eye.classList.add('fa-eye');
+        document.querySelector('.balance-toggle-btn').setAttribute('aria-label', 'Ocultar saldo');
+        document.querySelector('.balance-toggle-btn').setAttribute('aria-pressed', 'false');
+      }
+      balanceVisible = !balanceVisible;
+    }
+
+    function openSettings() {
+      const modal = document.getElementById('settingsModal');
+      modal.classList.add('is-open');
+      modal.querySelector('.settings-close').focus();
+    }
+
+    function closeSettings() {
+      document.getElementById('settingsModal').classList.remove('is-open');
+    }
+
+    function closeSettingsOnBackdrop(event) {
+      if (event.target.id === 'settingsModal') {
+        closeSettings();
+      }
+    }
+
+    function saveNotificationPreference() {
+      const enabled = document.getElementById('notificationsToggle').checked;
+      localStorage.setItem('notificationsEnabled', String(enabled));
+      showToast(enabled ? 'Notificações ativadas.' : 'Notificações desativadas.');
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeSettings();
+      }
+    });
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('is-visible');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2800);
+    }
+
+    // Recuperar dados do usuário
+    window.addEventListener('load', function() {
+      let userData;
+      try {
+        userData = JSON.parse(localStorage.getItem('userData'));
+      } catch (error) {
+        localStorage.removeItem('userData');
+      }
+
+      if (userData && userData.nome && userData.email) {
+        const firstName = userData.nome.trim().split(/\s+/)[0];
+        document.getElementById('userName').textContent = `Olá, ${firstName}!`;
+        document.getElementById('userEmail').textContent = userData.email;
+        document.getElementById('settingsName').textContent = userData.nome;
+        document.getElementById('settingsEmail').textContent = userData.email;
+        document.getElementById('notificationsToggle').checked = localStorage.getItem('notificationsEnabled') !== 'false';
+        balanceVisible = localStorage.getItem('hideBalance') !== 'true';
+        document.getElementById('cardHolderName').textContent = userData.nome.toUpperCase();
+        renderPanelAccountState();
+      } else {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+
+</body>
+</html>

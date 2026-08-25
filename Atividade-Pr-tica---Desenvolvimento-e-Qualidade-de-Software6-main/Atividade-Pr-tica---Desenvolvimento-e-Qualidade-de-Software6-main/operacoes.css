@@ -1,0 +1,729 @@
+/* ============================================================
+   RESET & BASE - Estilo Itaú Unibanco
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --itau-orange: #FF6200;
+  --itau-orange-hover: #E05500;
+  --itau-orange-light: #FFF0E8;
+  --itau-dark: #1A1A1A;
+  --itau-gray: #F5F5F5;
+  --itau-gray-light: #FAFAFA;
+  --itau-border: #E8E8E8;
+  --itau-muted: #6B6B6B;
+  --itau-white: #FFFFFF;
+  --itau-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  --itau-shadow-hover: 0 4px 24px rgba(0, 0, 0, 0.12);
+  --itau-radius: 12px;
+  --itau-radius-sm: 8px;
+  --itau-transition: 0.25s ease;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--itau-dark);
+  background: var(--itau-gray);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   HEADER - Estilo Itaú
+   ============================================================ */
+.app-header {
+  height: 72px;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--itau-white);
+  border-bottom: 1px solid var(--itau-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.brand {
+  color: var(--itau-dark);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--itau-orange) 0%, #cc4f00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--itau-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--itau-radius-sm);
+  transition: all var(--itau-transition);
+}
+
+.back-link:hover {
+  background: var(--itau-gray-light);
+  color: var(--itau-orange);
+}
+
+.back-link i {
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   PÁGINA - Layout principal
+   ============================================================ */
+.page-shell {
+  max-width: 1200px;
+  color: var(--itau-muted);
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+   LAYOUT - Grid principal
+   ============================================================ */
+.operation-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ============================================================
+   CARDS - Padrão Itaú
+   ============================================================ */
+.form-card,
+.info-card,
+.activity-card {
+  padding: 1.75rem 2rem;
+  border: 1px solid var(--itau-border);
+  border-radius: var(--itau-radius);
+  background: var(--itau-white);
+  box-shadow: var(--itau-shadow);
+  transition: box-shadow var(--itau-transition);
+}
+
+.form-card:hover,
+.activity-card:hover {
+  box-shadow: var(--itau-shadow-hover);
+}
+
+.form-card h2,
+.info-card h2,
+.activity-card h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--itau-dark);
+  margin-bottom: 1.25rem;
+}
+
+/* ============================================================
+   FORMULÁRIO
+   ============================================================ */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+.field label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--itau-muted);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 1rem;
+  border: 1.5px solid var(--itau-border);
+  border-radius: var(--itau-radius-sm);
+  outline: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--itau-dark);
+  background: var(--itau-white);
+  transition: border-color var(--itau-transition), box-shadow var(--itau-transition);
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--itau-orange);
+  box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.12);
+}
+
+.field input::placeholder {
+  color: #aaa;
+}
+
+/* ============================================================
+   BOTÃO PRINCIPAL
+   ============================================================ */
+.submit-button {
+  width: 100%;
+  min-height: 50px;
+  margin-top: 1.5rem;
+  border: none;
+  border-radius: var(--itau-radius-sm);
+  background: var(--itau-orange);
+  color: var(--itau-white);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--itau-transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.submit-button:hover {
+  background: var(--itau-orange-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 98, 0, 0.3);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ============================================================
+   CONFIRMAÇÃO
+   ============================================================ */
+.confirmation-box {
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+.confirmation-icon {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--itau-orange-light);
+  color: var(--itau-orange);
+  font-size: 1.5rem;
+}
+
+.confirmation-icon.success {
+  background: #e6f7e6;
+  color: #2e7d32;
+}
+
+.confirmation-box h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.confirmation-box p {
+  color: var(--itau-muted);
+  font-size: 0.9rem;
+}
+
+.confirmation-box label {
+  display: block;
+  margin-top: 1.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--itau-muted);
+  text-align: left;
+}
+
+.confirmation-box input {
+  width: 100%;
+  min-height: 50px;
+  margin-top: 0.5rem;
+  padding: 0 1rem;
+  border: 1.5px solid var(--itau-border);
+  border-radius: var(--itau-radius-sm);
+  outline: none;
+  font-family: inherit;
+  font-size: 1.2rem;
+  letter-spacing: 6px;
+  text-align: center;
+  color: var(--itau-dark);
+  background: var(--itau-white);
+  transition: border-color var(--itau-transition), box-shadow var(--itau-transition);
+}
+
+.confirmation-box input:focus {
+  border-color: var(--itau-orange);
+  box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.12);
+}
+
+.confirmation-box small {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--itau-muted);
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.cancel-button {
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.6rem;
+  border: none;
+  background: transparent;
+  color: var(--itau-muted);
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color var(--itau-transition);
+}
+
+.cancel-button:hover {
+  color: var(--itau-orange);
+}
+
+.confirmation-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--itau-radius-sm);
+  background: var(--itau-orange);
+  color: var(--itau-white);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--itau-transition);
+}
+
+.confirmation-link:hover {
+  background: var(--itau-orange-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 98, 0, 0.3);
+}
+
+/* ============================================================
+   INFO CARD - Sidebar escura (estilo Itaú)
+   ============================================================ */
+.info-card {
+  background: var(--itau-dark);
+  color: var(--itau-white);
+  border-color: var(--itau-dark);
+}
+
+.info-card h2 {
+  color: var(--itau-white);
+  font-weight: 600;
+}
+
+.info-card p {
+  color: #b0b0b0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.info-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  list-style: none;
+}
+
+.info-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: #d0d0d0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.info-list i {
+  width: 20px;
+  color: var(--itau-orange);
+  text-align: center;
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   MENU / NAVEGAÇÃO LATERAL
+   ============================================================ */
+.menu-list {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: var(--itau-radius-sm);
+  color: var(--itau-dark);
+  text-decoration: none;
+  transition: all var(--itau-transition);
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: var(--itau-gray-light);
+  color: var(--itau-orange);
+}
+
+.menu-item > i:first-child {
+  width: 22px;
+  color: var(--itau-orange);
+  text-align: center;
+  font-size: 1rem;
+}
+
+.menu-item > i:last-child {
+  margin-left: auto;
+  color: var(--itau-muted);
+  font-size: 0.7rem;
+  transition: transform var(--itau-transition);
+}
+
+.menu-item:hover > i:last-child {
+  transform: translateX(3px);
+  color: var(--itau-orange);
+}
+
+.menu-item span {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.menu-item small {
+  color: var(--itau-muted);
+  font-size: 0.75rem;
+}
+
+.menu-item:focus-visible {
+  outline: 2px solid var(--itau-orange);
+  outline-offset: -2px;
+}
+
+/* ============================================================
+   ACTIVITY CARD - Últimas atividades
+   ============================================================ */
+.activity-card {
+  grid-column: 1 / -1;
+}
+
+.activity-card h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.activity-card h2 small {
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--itau-muted);
+}
+
+.activity-list {
+  display: grid;
+  gap: 0;
+  list-style: none;
+}
+
+.activity-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--itau-border);
+  font-size: 0.85rem;
+}
+
+.activity-list li:last-child {
+  border-bottom: none;
+}
+
+.activity-name {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.activity-name i {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--itau-orange-light);
+  color: var(--itau-orange);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.activity-date {
+  color: var(--itau-muted);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   FEEDBACK / TOAST
+   ============================================================ */
+.feedback {
+  display: none;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--itau-radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.feedback.is-visible {
+  display: block;
+  animation: fadeSlideIn 0.3s ease;
+}
+
+.feedback-success {
+  background: #e6f7e6;
+  color: #1e7e34;
+  border: 1px solid #b8e0b8;
+}
+
+.feedback-error {
+  background: #fde8e8;
+  color: #c62828;
+  border: 1px solid #f5c2c2;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   UTILITÁRIOS
+   ============================================================ */
+.is-hidden {
+  display: none !important;
+}
+
+/* ============================================================
+   MOBILE BOTTOM NAV - Estilo Itaú
+   ============================================================ */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--itau-white);
+  border-top: 1px solid var(--itau-border);
+  padding: 0.4rem 0.25rem;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.mobile-bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.4rem 0.2rem;
+  border-radius: var(--itau-radius-sm);
+  color: var(--itau-muted);
+  font-size: 0.6rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--itau-transition);
+}
+
+.mobile-bottom-nav a i {
+  font-size: 1.2rem;
+}
+
+.mobile-bottom-nav a.is-active {
+  color: var(--itau-orange);
+  background: var(--itau-orange-light);
+}
+
+.mobile-bottom-nav a:hover {
+  color: var(--itau-orange);
+  background: var(--itau-orange-light);
+}
+
+.mobile-bottom-nav a:focus-visible {
+  outline: 2px solid var(--itau-orange);
+  outline-offset: -2px;
+}
+
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .operation-layout {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .activity-card {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    height: 60px;
+    padding: 0 1rem;
+  }
+
+  .brand {
+    font-size: 1.2rem;
+  }
+
+  .page-shell {
+    padding: 1.25rem 1rem 5rem;
+  }
+
+  .form-card,
+  .info-card,
+  .activity-card {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .field.full {
+    grid-column: auto;
+  }
+
+  body {
+    padding-bottom: 70px;
+  }
+
+  .mobile-bottom-nav {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .confirmation-box input {
+    font-size: 1rem;
+    letter-spacing: 4px;
+  }
+
+  .activity-list li {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .activity-date {
+    margin-left: 2.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    height: 54px;
+    padding: 0 0.75rem;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .back-link {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .page-shell {
+    padding: 1rem 0.75rem 5rem;
+  }
+
+  .page-intro h1 {
+    font-size: 1.4rem;
+  }
+
+  .form-card,
+  .info-card,
+  .activity-card {
+    padding: 1rem;
+    border-radius: var(--itau-radius-sm);
+  }
+
+  .submit-button {
+    min-height: 44px;
+    font-size: 0.85rem;
+  }
+
+  .menu-item {
+    padding: 0.6rem 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  .mobile-bottom-nav a {
+    font-size: 0.55rem;
+  }
+
+  .mobile-bottom-nav a i {
+    font-size: 1rem;
+  }
+
+  .confirmation-box input {
+    min-height: 44px;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+  }
+
+  .activity-name i {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+}
