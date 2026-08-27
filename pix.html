@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itaú - Pix</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="operacoes.css">
+  <script src="theme.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="painel.html">itaú</a>
+    <a class="back-link" href="painel.html"><i class="fas fa-arrow-left"></i> Voltar ao painel</a>
+  </header>
+  <main class="page-shell">
+    <div class="page-intro">
+      <span class="page-kicker">Pagamentos instantâneos</span>
+      <h1>Pix</h1>
+      <p>Envie dinheiro em poucos segundos usando uma chave Pix, com confirmação segura antes da conclusão.</p>
+    </div>
+    <div class="operation-layout">
+      <section class="form-card">
+        <h2>Enviar Pix</h2>
+        <form id="pixForm">
+          <div class="form-grid">
+            <div class="field full"><label for="pixKey">Chave Pix</label><input id="pixKey" required placeholder="CPF, e-mail, telefone ou chave aleatória"></div>
+            <div class="field"><label for="pixName">Nome do favorecido</label><input id="pixName" required placeholder="Nome completo"></div>
+            <div class="field"><label for="pixAmount">Valor</label><input id="pixAmount" required type="number" min="0.01" step="0.01" placeholder="R$ 0,00"></div>
+          </div>
+          <button class="submit-button" type="submit">Continuar com Pix <i class="fas fa-arrow-right"></i></button>
+        </form>
+        <div class="feedback" id="feedback" role="status"></div>
+      </section>
+      <aside class="info-card">
+        <h2>Pix do seu jeito</h2>
+        <p>Escolha como quer movimentar seu dinheiro e acompanhe tudo pelo extrato da conta.</p>
+        <ul class="info-list">
+          <li><i class="fas fa-bolt"></i><span>Disponível a qualquer hora</span></li>
+          <li><i class="fas fa-shield-alt"></i><span>Confirmação antes de enviar</span></li>
+          <li><i class="fas fa-qrcode"></i><span>Também funciona com QR Code</span></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+  <nav class="mobile-bottom-nav" aria-label="Navegação principal">
+    <a href="painel.html"><i class="fas fa-house"></i><span>Casa</span></a>
+    <a href="extrato.html"><i class="fas fa-list"></i><span>Extrato</span></a>
+    <a href="pagar.html"><i class="fas fa-arrow-right-arrow-left"></i><span>Pagamentos</span></a>
+    <a href="painel.html#help"><i class="fas fa-gift"></i><span>Pra você</span></a>
+    <a href="menu.html"><i class="fas fa-grip"></i><span>Menu</span></a>
+  </nav>
+  <script src="operacoes.js"></script>
+  <script>
+    setupDebitOperation('pixForm', 'pixAmount', {
+      type: 'pix',
+      label: 'um Pix',
+      title: 'Pix enviado',
+      description: () => `Para ${document.getElementById('pixName').value.trim()}`,
+      successMessage: (amount) => `Pix de ${amount} enviado com sucesso. O saldo da sua conta foi atualizado.`
+    });
+  </script>
+</body>
+</html>

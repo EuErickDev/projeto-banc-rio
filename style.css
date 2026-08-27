@@ -1,0 +1,485 @@
+/* ==========================================
+   RESET E CONFIGURAÇÕES GERAIS
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #000000;
+  color: #000000;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+/* ==========================================
+   CONTAINER PRINCIPAL
+   ========================================== */
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==========================================
+   CABEÇALHO COM LOGO AO LADO DO TEXTO
+   ========================================== */
+.brand-header {
+  display: grid;
+  grid-template-columns: auto 1fr; /* Logo à esquerda, texto à direita */
+  grid-template-rows: auto auto;    /* Título na linha 1, Subtítulo na linha 2 */
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 4px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+/* Logo alinhada à esquerda pegando as duas linhas de texto */
+.logo-img {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
+/* Título Bem-vindo */
+.brand-header h1 {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  text-align: left;
+}
+
+/* Subtítulo */
+.brand-header p {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 0.875rem;
+  color: #a0a0a0;
+  text-align: left;
+}
+
+/* ==========================================
+   FORMULÁRIO E INPUTS
+   ========================================== */
+.signup-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 16px 20px;
+  background-color: #5a5a5a;
+  border: 1.5px solid transparent;
+  border-radius: 16px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 88px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+  border: 0;
+  background: transparent;
+  color: #d5d5d5;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible {
+  color: #FF6200;
+  outline: none;
+}
+
+.input-group input::placeholder {
+  color: #b0b0b0;
+}
+
+/* Efeito no clique do campo (Laranja Itaú) */
+.input-group input:focus {
+  background-color: #636363;
+  border-color: #FF6200;
+  box-shadow: 0 0 10px rgba(255, 98, 0, 0.35);
+}
+
+/* ==========================================
+   BOTÃO SIGN UP
+   ========================================== */
+.btn-signup {
+  margin-top: 10px;
+  width: 100%;
+  padding: 14px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1.5px solid #ffffff;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-signup:hover {
+  background-color: #FF6200;
+  border-color: #FF6200;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(255, 98, 0, 0.3);
+}
+/* ==========================================
+   CONTAINER DA LOGO (Empilha as imagens)
+   ========================================== */
+.logo-container {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  position: relative;
+  width: 56px;
+  height: 56px;
+  overflow: hidden; /* Corta o brilho que passa para fora */
+  border-radius: 12px; /* Opcional: arredonda se quiser */
+}
+
+/* Configuração comum das duas imagens */
+.logo-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Imagem de fundo (Logo 1) */
+.logo-base {
+  z-index: 1;
+}
+
+/* Imagem da frente (Logo 2) que vai aparecer/desaparecer */
+.logo-overlay {
+  z-index: 2;
+  opacity: 0;
+  animation: transicaoLogo 6s ease-in-out infinite;
+}
+
+.logo {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+
+/* ==========================================
+   EFEITO DO RAIO DE LUZ (BRILHO PASSANDO)
+   ========================================== */
+.logo-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  /* Gradiente translúcido simulando um feixe/raio de luz diagonal */
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  transform: skewX(-20deg); /* Inclina o raio de luz */
+  z-index: 10;
+  animation: raioLuz 6s ease-in-out infinite;
+}
+
+/* ==========================================
+   ANIMAÇÕES (Sincronizadas)
+   ========================================== */
+
+/* Animação do Raio de Luz atravessando a logo */
+@keyframes raioLuz {
+  0% {
+    left: -150%;
+  }
+  20% {
+    left: 150%; /* O raio atravessa rapidamente no início do ciclo */
+  }
+  100% {
+    left: 150%; /* Fica pausado o resto do tempo */
+  }
+}
+
+/* Animação da troca de imagem (Fade in / Fade out) */
+@keyframes transicaoLogo {
+  0%, 30% {
+    opacity: 0; /* Mostra a primeira imagem */
+  }
+  50%, 80% {
+    opacity: 1; /* Transiciona para a segunda imagem exato quando o raio passa */
+  }
+  100% {
+    opacity: 0; /* Retorna para a primeira imagem */
+  }
+}
+
+/* Estilização específica do "Esqueci minha senha" */
+.forgot-password {
+  align-self: center; /* Centraliza o link horizontalmente */
+  margin-top: 6px;
+  font-size: 12px;
+  color: #aaa9a9;
+  text-decoration: none; /* Remove o sublinhado padrão */
+  transition: color 0.2s ease;
+}
+
+.forgot-password:hover,
+.forgot-password:focus-visible {
+  color: #FF6200;
+  text-decoration: underline;
+}
+
+.forgot-criarconta {
+  align-self: center;
+  color: #aaa9a9;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.forgot-criarconta:hover,
+.forgot-criarconta:focus-visible {
+  color: #FF6200;
+  text-decoration: underline;
+}
+
+.account-form {
+  gap: 16px;
+}
+
+.account-form .btn-signup {
+  margin-top: 8px;
+}
+
+.account-form .input-group input:invalid:not(:placeholder-shown) {
+  border-color: #d86a6a;
+}
+
+.account-form .input-group input:valid:not(:placeholder-shown) {
+  border-color: #6db47a;
+}
+
+.recovery-link {
+  margin-top: 0;
+}
+
+.form-feedback {
+  display: none;
+  color: #b8e6c1;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.form-feedback.is-visible {
+  display: block;
+}
+
+/* Tema alinhado ao painel */
+body {
+  background: #000000;
+  color: #ffffff;
+}
+
+.login-container {
+  align-items: center;
+  padding: 32px;
+  border: 1px solid #333333;
+  border-radius: 16px;
+  background: #000000;
+  box-shadow: 0 12px 30px rgba(255, 255, 255, .08);
+}
+
+.brand-header h1,
+.input-group label {
+  color: #ffffff;
+}
+
+.brand-header p {
+  color: #666;
+}
+
+.input-group input {
+  background: #000000;
+  border: 1.5px solid #333333;
+  border-radius: 8px;
+  color: #ffffff;
+}
+
+.input-group input::placeholder {
+  color: #888;
+}
+
+.input-group input:focus {
+  background: #000000;
+  border-color: #ff5a00;
+  box-shadow: 0 0 10px rgba(255, 90, 0, .2);
+}
+
+.btn-signup {
+  background: #ff5a00;
+  border-color: #ff5a00;
+  border-radius: 8px;
+}
+
+.btn-signup:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
+}
+
+.forgot-password,
+.forgot-criarconta,
+.password-toggle {
+  color: #666;
+}
+
+.forgot-password:hover,
+.forgot-password:focus-visible,
+.forgot-criarconta:hover,
+.forgot-criarconta:focus-visible,
+.password-toggle:hover,
+.password-toggle:focus-visible {
+  color: #ff5a00;
+}
+
+@media (max-width: 500px) {
+  .login-container {
+    padding: 24px 20px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+.mobile-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  body {
+    padding-bottom: 76px;
+  }
+
+  .mobile-bottom-nav {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 8px 6px;
+    border-top: 1px solid #333333;
+    background: #000000;
+    box-shadow: 0 -6px 18px rgba(255, 255, 255, .08);
+  }
+
+  .mobile-bottom-nav a {
+    display: grid;
+    justify-items: center;
+    gap: 5px;
+    padding: 7px 2px;
+    border-radius: 8px;
+    color: #666;
+    font-size: 10px;
+    text-decoration: none;
+  }
+
+  .mobile-bottom-nav a i {
+    font-size: 16px;
+  }
+
+  .mobile-bottom-nav a:hover,
+  .mobile-bottom-nav a:focus-visible {
+    background: #ff5a00;
+    color: #fff;
+    outline: 0;
+  }
+}
+
+  html[data-theme="light"] body {
+    background: #ffffff;
+    color: #202020;
+  }
+
+  html[data-theme="light"] .login-container {
+    border-color: #d8d8d8;
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(32, 32, 32, .08);
+  }
+
+  html[data-theme="light"] .brand-header h1,
+  html[data-theme="light"] .input-group label {
+    color: #202020;
+  }
+
+  html[data-theme="light"] .input-group input {
+    background: #ffffff;
+    border-color: #d8d8d8;
+    color: #202020;
+  }
+
+  html[data-theme="light"] .input-group input:focus {
+    background: #ffffff;
+  }
+
+  html[data-theme="light"] .mobile-bottom-nav {
+    border-top-color: #d8d8d8;
+    background: #ffffff;
+    box-shadow: 0 -6px 18px rgba(32, 32, 32, .08);
+  }

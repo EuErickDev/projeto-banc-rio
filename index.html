@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesse sua conta no Itaú: Soluções financeiras para você</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/webp" href="ITAU_LOGO.webp">
+</head>
+<body>
+
+  <main class="login-container">
+    <header class="brand-header">
+      <h1> Acesse sua conta no Itaú</h1>
+      <p>Soluções financeiras para você</p>
+    <div class="logo-container">
+  <img src="itau1.png" alt="Logo 1" class="logo-img logo-base">
+  <img src="itau2.png" alt="Logo 2" class="logo-img logo-overlay">
+</div>
+    </header>
+
+    <form class="signup-form" id="formLogin">
+      <div class="input-group">
+        <label for="name">NOME</label>
+        <input type="text" id="name" placeholder="Nome completo" required>
+      </div>
+
+      <div class="input-group">
+        <label for="email">E-MAIL</label>
+        <input type="email" id="email" placeholder="Informe seu E-mail" required>
+      </div>
+
+      <div class="input-group">
+        <label for="password">SENHA</label>
+        <div class="password-field">
+          <input type="password" id="password" placeholder="Digite sua senha" required
+                 title="Mín. 8 caracteres: 1 maiúscula, 1 minúscula, 1 número, 1 especial (@$!%*?&)">
+          <button type="button" class="password-toggle" data-password-target="password" aria-label="Mostrar senha" title="Mostrar senha"><i class="fas fa-eye" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- Link de Esqueci a Senha -->
+      <a href="recuperar-senha.html" class="forgot-password">Esqueceu a senha?</a>
+      <a href="Criar-Conta.html" class="forgot-criarconta">Não possui uma conta? Abra sua Conta</a>
+      <button type="submit" class="btn-signup">Acessar</button>
+    </form>
+    <nav class="mobile-bottom-nav" aria-label="Navegação principal">
+      <a href="index.html"><i class="fas fa-house"></i><span>Casa</span></a>
+      <a href="extrato.html"><i class="fas fa-list"></i><span>Extrato</span></a>
+      <a href="pagar.html"><i class="fas fa-arrow-right-arrow-left"></i><span>Pagamentos</span></a>
+      <a href="painel.html#help"><i class="fas fa-gift"></i><span>Pra você</span></a>
+      <a href="menu.html"><i class="fas fa-grip"></i><span>Menu</span></a>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+      document.querySelectorAll(".password-toggle").forEach(function (toggle) {
+        toggle.addEventListener("click", function () {
+          const password = document.getElementById(toggle.dataset.passwordTarget);
+          const isHidden = password.type === "password";
+          password.type = isHidden ? "text" : "password";
+          toggle.querySelector("i").className = isHidden ? "fas fa-eye-slash" : "fas fa-eye";
+          toggle.setAttribute("aria-label", isHidden ? "Ocultar senha" : "Mostrar senha");
+          toggle.setAttribute("title", isHidden ? "Ocultar senha" : "Mostrar senha");
+        });
+      });
+    </script>
+  </main>
+
+</body>
+</html>

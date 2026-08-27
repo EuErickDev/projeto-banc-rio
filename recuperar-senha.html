@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar senha | Itaú</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="theme.js"></script>
+</head>
+<body>
+    <main class="login-container recovery-container">
+        <header class="brand-header">
+            <div class="logo-container" aria-hidden="true">
+                <img src="itau1.png" alt="" class="logo-img logo-base">
+                <img src="itau2.png" alt="" class="logo-img logo-overlay">
+            </div>
+            <h1>Recupere sua senha</h1>
+            <p>Informe seus dados para receber as instruções de acesso.</p>
+        </header>
+
+        <form class="signup-form" id="formRecuperacao">
+            <div class="input-group">
+                <label for="recovery-email">E-MAIL</label>
+                <input type="email" id="recovery-email" name="email"
+                       placeholder="Informe seu e-mail" autocomplete="email" required>
+            </div>
+
+            <button type="submit" class="btn-signup">Enviar instruções</button>
+            <a href="index.html" class="forgot-password recovery-link">Voltar para o acesso</a>
+            <p class="form-feedback" id="formFeedback" role="status" aria-live="polite"></p>
+        </form>
+        <nav class="mobile-bottom-nav" aria-label="Navegação principal">
+            <a href="index.html"><i class="fas fa-house"></i><span>Casa</span></a>
+            <a href="extrato.html"><i class="fas fa-list"></i><span>Extrato</span></a>
+            <a href="pagar.html"><i class="fas fa-arrow-right-arrow-left"></i><span>Pagamentos</span></a>
+            <a href="painel.html#help"><i class="fas fa-gift"></i><span>Pra você</span></a>
+            <a href="menu.html"><i class="fas fa-grip"></i><span>Menu</span></a>
+        </nav>
+    </main>
+
+    <script>
+        const formRecuperacao = document.getElementById("formRecuperacao");
+        const formFeedback = document.getElementById("formFeedback");
+
+        formRecuperacao.addEventListener("submit", function (event) {
+            event.preventDefault();
+            formFeedback.textContent = "Se o e-mail estiver cadastrado, você receberá as instruções em instantes.";
+            formFeedback.classList.add("is-visible");
+            formRecuperacao.reset();
+        });
+    </script>
+</body>
+</html>

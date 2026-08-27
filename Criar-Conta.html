@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar conta | Itaú</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <main class="login-container">
+        <header class="brand-header">
+            <div class="logo-container" aria-hidden="true">
+                <img src="itau1.png" alt="" class="logo-img logo-base">
+                <img src="itau2.png" alt="" class="logo-img logo-overlay">
+            </div>
+            <h1>Abra sua conta</h1>
+            <p>Crie seu acesso para cuidar da sua vida financeira.</p>
+        </header>
+
+        <form class="signup-form account-form" id="formCriarConta">
+            <div class="input-group">
+                <label for="account-name">NOME COMPLETO</label>
+                <input type="text" id="account-name" name="name"
+                       placeholder="Digite seu nome completo" autocomplete="name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="account-email">E-MAIL</label>
+                <input type="email" id="account-email" name="email"
+                       placeholder="Informe seu e-mail" autocomplete="email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="account-password">SENHA</label>
+                <div class="password-field">
+                    <input type="password" id="account-password" name="password"
+                           placeholder="Crie uma senha forte" autocomplete="new-password"
+                           minlength="8" required>
+                    <button type="button" class="password-toggle" data-password-target="account-password" aria-label="Mostrar senha" title="Mostrar senha"><i class="fas fa-eye" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="account-password-confirmation">CONFIRME SUA SENHA</label>
+                <div class="password-field">
+                    <input type="password" id="account-password-confirmation" name="passwordConfirmation"
+                           placeholder="Digite a senha novamente" autocomplete="new-password"
+                           minlength="8" required>
+                    <button type="button" class="password-toggle" data-password-target="account-password-confirmation" aria-label="Mostrar confirmação de senha" title="Mostrar confirmação de senha"><i class="fas fa-eye" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-signup">Criar minha conta</button>
+            <a href="index.html" class="forgot-password recovery-link">Já tenho uma conta</a>
+            <p class="form-feedback" id="accountFeedback" role="status" aria-live="polite"></p>
+        </form>
+        <nav class="mobile-bottom-nav" aria-label="Navegação principal">
+            <a href="index.html"><i class="fas fa-house"></i><span>Casa</span></a>
+            <a href="extrato.html"><i class="fas fa-list"></i><span>Extrato</span></a>
+            <a href="pagar.html"><i class="fas fa-arrow-right-arrow-left"></i><span>Pagamentos</span></a>
+            <a href="painel.html#help"><i class="fas fa-gift"></i><span>Pra você</span></a>
+            <a href="menu.html"><i class="fas fa-grip"></i><span>Menu</span></a>
+        </nav>
+    </main>
+
+    <script>
+        const formCriarConta = document.getElementById("formCriarConta");
+        const accountPassword = document.getElementById("account-password");
+        const accountPasswordConfirmation = document.getElementById("account-password-confirmation");
+        const accountFeedback = document.getElementById("accountFeedback");
+
+        formCriarConta.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (accountPassword.value !== accountPasswordConfirmation.value) {
+                accountPasswordConfirmation.setCustomValidity("As senhas precisam ser iguais.");
+                accountPasswordConfirmation.reportValidity();
+                return;
+            }
+
+            accountPasswordConfirmation.setCustomValidity("");
+            accountFeedback.textContent = "Conta criada com sucesso! Você já pode acessar sua conta.";
+            accountFeedback.classList.add("is-visible");
+            formCriarConta.reset();
+        });
+
+        accountPasswordConfirmation.addEventListener("input", function () {
+            accountPasswordConfirmation.setCustomValidity(
+                accountPassword.value === accountPasswordConfirmation.value ? "" : "As senhas precisam ser iguais."
+            );
+        });
+
+        document.querySelectorAll(".password-toggle").forEach(function (toggle) {
+            toggle.addEventListener("click", function () {
+                const password = document.getElementById(toggle.dataset.passwordTarget);
+                const isHidden = password.type === "password";
+                password.type = isHidden ? "text" : "password";
+                toggle.querySelector("i").className = isHidden ? "fas fa-eye-slash" : "fas fa-eye";
+                toggle.setAttribute("aria-label", isHidden ? "Ocultar senha" : "Mostrar senha");
+                toggle.setAttribute("title", isHidden ? "Ocultar senha" : "Mostrar senha");
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itaú - Pagar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="operacoes.css">
+  <script src="theme.js"></script>
+</head>
+<body>
+  <header class="app-header"><a class="brand" href="painel.html">itaú</a><a class="back-link" href="painel.html"><i class="fas fa-arrow-left"></i> Voltar ao painel</a></header>
+  <main class="page-shell">
+    <div class="page-intro"><span class="page-kicker">Contas e boletos</span><h1>Pagar</h1><p>Pague um boleto ou conta informando o código de barras e confirme com sua senha de 6 dígitos.</p></div>
+    <div class="operation-layout">
+      <section class="form-card">
+        <h2>Pagamento de conta</h2>
+        <form id="paymentForm">
+          <div class="form-grid">
+            <div class="field full"><label for="barcode">Código de barras</label><input id="barcode" required inputmode="numeric" placeholder="Digite ou cole o código do boleto"></div>
+            <div class="field"><label for="paymentType">Tipo de pagamento</label><select id="paymentType" required><option value="">Selecione</option><option>Conta de luz</option><option>Conta de água</option><option>Internet e telefone</option><option>Boleto bancário</option></select></div>
+            <div class="field"><label for="paymentAmount">Valor</label><input id="paymentAmount" required type="number" min="0.01" step="0.01" placeholder="R$ 0,00"></div>
+            <div class="field full">
+              <label for="paymentSchedule">Quando pagar</label>
+              <select id="paymentSchedule" required>
+                <option value="system">Pagar hoje (data do sistema)</option>
+                <option value="custom">Escolher uma data</option>
+              </select>
+            </div>
+            <div class="field full is-hidden" id="customDateField">
+              <label for="paymentDate">Data escolhida</label>
+              <input id="paymentDate" type="date">
+            </div>
+          </div>
+          <button class="submit-button" type="submit">Continuar pagamento <i class="fas fa-arrow-right"></i></button>
+        </form>
+        <div class="feedback" id="feedback" role="status"></div>
+      </section>
+      <aside class="info-card"><h2>Pagamento seguro</h2><p>Você revisará todos os detalhes antes de confirmar. A senha será solicitada na etapa final.</p><ul class="info-list"><li><i class="fas fa-barcode"></i><span>Confira o código de barras</span></li><li><i class="fas fa-calendar-alt"></i><span>Escolha quando pagar</span></li><li><i class="fas fa-receipt"></i><span>Comprovante ao finalizar</span></li></ul></aside>
+    </div>
+  </main>
+  <nav class="mobile-bottom-nav" aria-label="Navegação principal">
+    <a href="painel.html"><i class="fas fa-house"></i><span>Casa</span></a>
+    <a href="extrato.html"><i class="fas fa-list"></i><span>Extrato</span></a>
+    <a href="pagar.html" class="is-active"><i class="fas fa-arrow-right-arrow-left"></i><span>Pagamentos</span></a>
+    <a href="painel.html#help"><i class="fas fa-gift"></i><span>Pra você</span></a>
+    <a href="menu.html"><i class="fas fa-grip"></i><span>Menu</span></a>
+  </nav>
+  <script src="operacoes.js"></script>
+  <script>
+    const paymentSchedule = document.getElementById('paymentSchedule');
+    const customDateField = document.getElementById('customDateField');
+    const paymentDate = document.getElementById('paymentDate');
+    const today = new Date();
+    const todayValue = [today.getFullYear(), String(today.getMonth() + 1).padStart(2, '0'), String(today.getDate()).padStart(2, '0')].join('-');
+    paymentDate.min = todayValue;
+    paymentDate.value = todayValue;
+
+    paymentSchedule.addEventListener('change', function() {
+      const customDateSelected = paymentSchedule.value === 'custom';
+      customDateField.classList.toggle('is-hidden', !customDateSelected);
+      paymentDate.required = customDateSelected;
+      if (!customDateSelected) paymentDate.value = todayValue;
+    });
+
+    setupDebitOperation('paymentForm', 'paymentAmount', {
+      type: 'payment',
+      label: 'um pagamento',
+      title: 'Conta paga',
+      description: () => {
+        const selectedDate = new Date(`${paymentDate.value}T12:00:00`).toLocaleDateString('pt-BR');
+        return `${document.getElementById('paymentType').value} · ${paymentSchedule.value === 'system' ? 'Hoje' : `Agendado para ${selectedDate}`}`;
+      },
+      successMessage: (amount) => {
+        const selectedDate = new Date(`${paymentDate.value}T12:00:00`).toLocaleDateString('pt-BR');
+        const timing = paymentSchedule.value === 'system' ? 'realizado hoje' : `agendado para ${selectedDate}`;
+        return `Pagamento de ${amount} ${timing}. O saldo da sua conta foi atualizado.`;
+      }
+    });
+  </script>
+</body>
+</html>
