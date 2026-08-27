@@ -52,7 +52,7 @@ formulario.addEventListener("submit", function(event) {
     localStorage.setItem('userData', JSON.stringify(userData));
 
     alert("✅ Login realizado com sucesso!");
-
+    sessionStorage.setItem("logado", "true");
     window.location.href = "painel.html";
 
 });
